@@ -1,4 +1,4 @@
-package com.laurentvrevin.draganddropwithcompose
+package com.laurentvrevin.draganddropwithcompose.presentation.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
