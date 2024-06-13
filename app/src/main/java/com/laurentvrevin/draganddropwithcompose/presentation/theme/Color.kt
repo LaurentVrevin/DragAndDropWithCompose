@@ -1,4 +1,4 @@
-package com.laurentvrevin.draganddropwithcompose.ui.theme
+package com.laurentvrevin.draganddropwithcompose.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
