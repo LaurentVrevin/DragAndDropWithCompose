@@ -66,8 +66,12 @@ dependencies {
     kapt(libs.androidx.room.compiler)
     implementation(libs.google.dagger.hilt)
     kapt(libs.google.dagger.hilt.compiler)
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    implementation("androidx.compose.animation:animation:1.0.0")
+    implementation("androidx.compose.foundation:foundation:1.0.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
