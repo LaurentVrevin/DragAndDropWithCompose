@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
-import com.laurentvrevin.draganddropwithcompose.presentation.composable.screens.MyAppScreen
 import com.laurentvrevin.draganddropwithcompose.presentation.navigation.NavGraph
 import com.laurentvrevin.draganddropwithcompose.presentation.theme.DragAndDropWithComposeTheme
 import com.laurentvrevin.draganddropwithcompose.presentation.viewmodel.TaskViewModel

@@ -15,8 +15,6 @@ import com.laurentvrevin.draganddropwithcompose.presentation.composable.componen
 
 @Composable
 fun TaskListScreen(navController: NavController, taskViewModel: TaskViewModel) {
-    val tasks by taskViewModel.tasks.collectAsState()
-
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(onClick = { navController.navigate("addTask") }) {
@@ -30,7 +28,7 @@ fun TaskListScreen(navController: NavController, taskViewModel: TaskViewModel) {
                 .padding(padding)
                 .padding(16.dp)
         ) {
-            TaskList(tasks = tasks, viewModel = taskViewModel)
+            TaskList(taskViewModel = taskViewModel)
         }
     }
 }

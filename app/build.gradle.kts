@@ -70,8 +70,9 @@ dependencies {
 
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
-    implementation("androidx.compose.animation:animation:1.0.0")
-    implementation("androidx.compose.foundation:foundation:1.0.0")
+
+
+    implementation("org.burnoutcrew.composereorderable:reorderable:0.9.6")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

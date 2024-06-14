@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.laurentvrevin.draganddropwithcompose.domain.model.Task
 import kotlinx.coroutines.flow.Flow
 
@@ -15,6 +16,9 @@ interface TaskDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addTask(task: Task)
+
+    @Update
+    suspend fun updateTask(tasks: List<Task>)
 
     @Delete
     suspend fun deleteTask(task: Task)
