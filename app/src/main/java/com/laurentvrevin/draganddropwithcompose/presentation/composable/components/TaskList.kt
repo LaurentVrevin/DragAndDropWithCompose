@@ -72,14 +72,14 @@ fun TaskList(taskViewModel: TaskViewModel) {
                             translationY = reorderableState.elementDisplacement ?: 0f
                         }
                     }
-                    .background(MaterialTheme.colorScheme.surface)
+
             ) {
                 TaskCard(
                     task = task,
                     isDragging = isDragging,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 4.dp)
+
                 )
             }
         }

@@ -24,7 +24,7 @@ fun TaskCard(task: Task, isDragging: Boolean, modifier: Modifier = Modifier) {
         shape = RoundedCornerShape(8.dp),
         modifier = modifier
             .fillMaxWidth()
-            .shadow(elevation, RoundedCornerShape(8.dp))
+            .shadow(elevation, RoundedCornerShape(8.dp), clip = true)
             .background(cardColor),
         elevation = CardDefaults.cardElevation(elevation)
     ) {
