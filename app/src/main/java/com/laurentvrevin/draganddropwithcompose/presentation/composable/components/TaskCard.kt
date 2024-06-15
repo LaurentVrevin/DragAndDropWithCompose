@@ -16,12 +16,17 @@ import androidx.compose.ui.unit.dp
 import com.laurentvrevin.draganddropwithcompose.domain.model.Task
 
 @Composable
-fun TaskCard(task: Task, modifier: Modifier = Modifier) {
+fun TaskCard(task: Task, isDragging: Boolean, modifier: Modifier = Modifier) {
+    val cardColor = if (isDragging) Color.LightGray else MaterialTheme.colorScheme.surface
+    val elevation = if (isDragging) 8.dp else 2.dp
+
     Card(
         shape = RoundedCornerShape(8.dp),
         modifier = modifier
-            .fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(4.dp)
+            .fillMaxWidth()
+            .shadow(elevation, RoundedCornerShape(8.dp))
+            .background(cardColor),
+        elevation = CardDefaults.cardElevation(elevation)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(text = task.title, style = MaterialTheme.typography.bodyLarge)

@@ -1,9 +1,8 @@
 package com.laurentvrevin.draganddropwithcompose.presentation.composable.components
 
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,7 +18,6 @@ import androidx.compose.ui.zIndex
 import com.laurentvrevin.draganddropwithcompose.domain.model.Task
 import com.laurentvrevin.draganddropwithcompose.presentation.viewmodel.TaskViewModel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.Job
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -45,16 +43,14 @@ fun TaskList(taskViewModel: TaskViewModel) {
         modifier = Modifier
             .fillMaxSize()
             .pointerInput(Unit) {
-                detectDragGestures(
+                detectDragGesturesAfterLongPress(
                     onDrag = { change, offset ->
                         change.consumeAllChanges()
                         reorderableState.onDrag(offset)
                         val overScrollAmount = reorderableState.checkForOverScroll()
                         if (overScrollAmount != 0f) {
                             coroutineScope.launch {
-                                if (overScrollAmount != null) {
-                                    reorderableState.lazyListState.scrollBy(overScrollAmount)
-                                }
+                                reorderableState.lazyListState.scrollBy(overScrollAmount)
                             }
                         }
                     },
@@ -80,6 +76,7 @@ fun TaskList(taskViewModel: TaskViewModel) {
             ) {
                 TaskCard(
                     task = task,
+                    isDragging = isDragging,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 4.dp)
