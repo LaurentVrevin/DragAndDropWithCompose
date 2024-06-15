@@ -70,7 +70,8 @@ dependencies {
 
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
-
+    implementation("androidx.compose.foundation:foundation:1.6.8")
+    implementation("androidx.compose.foundation:foundation-layout:1.6.8")
 
     implementation("org.burnoutcrew.composereorderable:reorderable:0.9.6")
 

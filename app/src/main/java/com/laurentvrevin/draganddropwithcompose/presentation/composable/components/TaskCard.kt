@@ -16,12 +16,12 @@ import androidx.compose.ui.unit.dp
 import com.laurentvrevin.draganddropwithcompose.domain.model.Task
 
 @Composable
-fun TaskCard(task: Task, elevation: Dp, modifier: Modifier = Modifier) {
+fun TaskCard(task: Task, modifier: Modifier = Modifier) {
     Card(
         shape = RoundedCornerShape(8.dp),
         modifier = modifier
             .fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(elevation)
+        elevation = CardDefaults.cardElevation(4.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(text = task.title, style = MaterialTheme.typography.bodyLarge)
