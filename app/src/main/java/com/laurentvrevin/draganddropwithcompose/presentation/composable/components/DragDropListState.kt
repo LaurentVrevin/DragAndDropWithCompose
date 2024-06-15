@@ -83,9 +83,9 @@ class DragDropListState(
     }
 
     fun checkForOverScroll(): Float {
-        return initiallyDraggedElement?.let {
-            val startOffset = it.offset + draggedDistance
-            val endOffset = it.offsetEnd + draggedDistance
+        return initiallyDraggedElement?.let { lazyListItemInfo ->
+            val startOffset = lazyListItemInfo.offset + draggedDistance
+            val endOffset = lazyListItemInfo.offsetEnd + draggedDistance
 
             when {
                 draggedDistance > 0 -> (endOffset - lazyListState.layoutInfo.viewportEndOffset).takeIf { it > 0 }
@@ -96,7 +96,6 @@ class DragDropListState(
     }
 }
 
-// Extensions for LazyListState and LazyListItemInfo
 fun LazyListState.getVisibleItemInfoFor(absolute: Int): LazyListItemInfo? {
     return this.layoutInfo.visibleItemsInfo.getOrNull(absolute - this.layoutInfo.visibleItemsInfo.first().index)
 }
