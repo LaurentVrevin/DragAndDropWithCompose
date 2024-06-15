@@ -1,29 +1,18 @@
-package com.laurentvrevin.draganddropwithcompose.presentation.composable.components
+package com.laurentvrevin.draganddropwithcompose.presentation.composable.screens
 
-
-import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
-import androidx.compose.foundation.gestures.scrollBy
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.laurentvrevin.draganddropwithcompose.presentation.viewmodel.TaskViewModel
-import kotlinx.coroutines.launch
+import com.laurentvrevin.draganddropwithcompose.presentation.composable.components.TaskCard
+import com.laurentvrevin.draganddropwithcompose.domain.draganddrop.rememberDragDropListState
+import com.laurentvrevin.draganddropwithcompose.domain.draganddrop.handleDragAndDrop
+import com.laurentvrevin.draganddropwithcompose.domain.util.updateTaskData
 
 
 @Composable
@@ -32,10 +21,7 @@ fun TaskList(taskViewModel: TaskViewModel) {
     var data by remember { mutableStateOf(tasks) }
 
     val reorderableState = rememberDragDropListState(onMove = { from, to ->
-        data = data.toMutableList().apply {
-            add(to, removeAt(from))
-        }
-        taskViewModel.updateTasks(data)
+        data = updateTaskData(taskViewModel, data, from, to)
     })
 
     LaunchedEffect(tasks) {
@@ -48,23 +34,7 @@ fun TaskList(taskViewModel: TaskViewModel) {
         state = reorderableState.lazyListState,
         modifier = Modifier
             .fillMaxSize()
-            .pointerInput(Unit) {
-                detectDragGesturesAfterLongPress(
-                    onDrag = { change, offset ->
-                        change.consume()
-                        reorderableState.onDrag(offset)
-                        val overScrollAmount = reorderableState.checkForOverScroll()
-                        if (overScrollAmount != 0f) {
-                            coroutineScope.launch {
-                                reorderableState.lazyListState.scrollBy(overScrollAmount)
-                            }
-                        }
-                    },
-                    onDragStart = { offset -> reorderableState.onDragStart(offset) },
-                    onDragEnd = { reorderableState.onDragInterrupted() },
-                    onDragCancel = { reorderableState.onDragInterrupted() }
-                )
-            }
+            .handleDragAndDrop(reorderableState, coroutineScope)
     ) {
         itemsIndexed(data) { index, task ->
             val isDragging = index == reorderableState.currentIndexOfDraggedItem
@@ -78,14 +48,11 @@ fun TaskList(taskViewModel: TaskViewModel) {
                             translationY = reorderableState.elementDisplacement ?: 0f
                         }
                     }
-
             ) {
                 TaskCard(
                     task = task,
                     isDragging = isDragging,
-                    modifier = Modifier
-                        .fillMaxWidth()
-
+                    modifier = Modifier.fillMaxWidth()
                 )
             }
         }

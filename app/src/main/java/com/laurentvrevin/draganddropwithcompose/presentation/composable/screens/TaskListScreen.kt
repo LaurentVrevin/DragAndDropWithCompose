@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.laurentvrevin.draganddropwithcompose.presentation.viewmodel.TaskViewModel
-import com.laurentvrevin.draganddropwithcompose.presentation.composable.components.TaskList
+
 
 @Composable
 fun TaskListScreen(navController: NavController, taskViewModel: TaskViewModel) {
