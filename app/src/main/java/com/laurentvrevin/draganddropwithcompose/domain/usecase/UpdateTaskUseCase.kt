@@ -4,10 +4,10 @@ import com.laurentvrevin.draganddropwithcompose.domain.model.Task
 import com.laurentvrevin.draganddropwithcompose.domain.repository.TaskRepository
 import javax.inject.Inject
 
-class UpdateTasksUseCase @Inject constructor(
+class UpdateTaskUseCase @Inject constructor(
     private val repository: TaskRepository
 ) {
-    suspend operator fun invoke(tasks: List<Task>) {
-        repository.updateTasks(tasks)
+    suspend operator fun invoke(task: Task) {
+        repository.updateTask(task)
     }
 }

@@ -11,6 +11,6 @@ fun updateTaskData(
     val updatedData = data.toMutableList().apply {
         add(to, removeAt(from))
     }
-    taskViewModel.updateTasks(updatedData)
+    taskViewModel.updateTasksList(updatedData)
     return updatedData
 }

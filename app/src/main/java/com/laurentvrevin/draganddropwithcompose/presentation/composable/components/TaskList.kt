@@ -51,7 +51,11 @@ fun TaskList(taskViewModel: TaskViewModel) {
             ) {
                 TaskCard(
                     task = task,
-                    isDragging = isDragging,
+                    isDragging = isDragging, onDelete = { taskViewModel.deleteTask(task) },
+                    onToggleComplete = {
+                        val updatedTask = task.copy(isCompleted = !task.isCompleted)
+                        taskViewModel.updateTask(updatedTask)
+                    },
                     modifier = Modifier.fillMaxWidth()
                 )
             }
