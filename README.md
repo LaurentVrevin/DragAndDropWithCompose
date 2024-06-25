@@ -22,8 +22,8 @@ This project is a simple To-Do list application built with Kotlin using Jetpack 
 
 ## Screenshots
 
-![Screenshot1](link_to_screenshot1)
-![Screenshot2](link_to_screenshot2)
+![Screen_Recording_20240625_162657_DragAndDropWithCompose](https://github.com/LaurentVrevin/DragAndDropWithCompose/assets/94620399/81c38a88-a554-4403-9176-92b25a65530b)
+
 
 ## Getting Started
 
